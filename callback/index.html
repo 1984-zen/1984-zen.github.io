@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>Zen Coding</title>
+<title>關於callback - Zen Coding</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -16,11 +16,15 @@
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Zen Coding">
-<meta property="og:url" content="https://1984-zen.github.io/index.html">
+    <meta name="description" content="什麼是callback?callback就是他事情做完後接著要做什麼事情關於JavaScript的非同步Javascript在執行時，是單執行緒來執行，且以先佔式多工的模式，做法就是先把所有工作都按順序接下來，然後先做一些工作A，在做一些工作B，在做一些工作B，接著在做一些工作C，不斷重複，直到所有工作都完成為止，ABC的工作完成時間都不同，這代表如果你想編寫可順利運行的程式，就必須用非同步的方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="關於callback">
+<meta property="og:url" content="https://1984-zen.github.io/callback/index.html">
 <meta property="og:site_name" content="Zen Coding">
+<meta property="og:description" content="什麼是callback?callback就是他事情做完後接著要做什麼事情關於JavaScript的非同步Javascript在執行時，是單執行緒來執行，且以先佔式多工的模式，做法就是先把所有工作都按順序接下來，然後先做一些工作A，在做一些工作B，在做一些工作B，接著在做一些工作C，不斷重複，直到所有工作都完成為止，ABC的工作完成時間都不同，這代表如果你想編寫可順利運行的程式，就必須用非同步的方式">
 <meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-02-04T14:17:54.000Z">
+<meta property="article:modified_time" content="2020-02-04T16:34:06.064Z">
 <meta property="article:author" content="Zen">
 <meta name="twitter:card" content="summary">
 
@@ -114,55 +118,10 @@
 
     <section class="section">
     <div class="container">
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/closure/" itemprop="url">認識Closure(閉包)</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2020-02-09T12:13:03.000Z" itemprop="datePublished">2月 9 2020</time>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            3 分钟 讀完 (約 515 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <html><head></head><body><h4 id="閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件"><a href="#閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件" class="headerlink" title="閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件"></a>閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件</h4><p>使用閉包時要注意：閉包雖然簡單易用，但也會造成佔用記憶體的問題。因為會讓函式執行完畢後，某些情況下，閉包的變數仍然無法釋放記憶體，所以使用閉包時還是要謹慎小心。</p>
-<h1 id="來看一個閉包的例子"><a href="#來看一個閉包的例子" class="headerlink" title="來看一個閉包的例子"></a>來看一個閉包的例子</h1><p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>)</span>{</span><br><span class="line">    <span class="hljs-keyword">let</span> a =<span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span>(<span class="hljs-params"></span>)</span>{</span><br><span class="line">        a++;</span><br><span class="line">        <span class="hljs-keyword">return</span> a</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> run;</span><br><span class="line">}</span><br><span class="line"><span class="hljs-keyword">var</span> f = foo();</span><br><span class="line"><span class="hljs-built_in">console</span>.log(f());</span><br></pre></td></tr></tbody></table></figure><br>執行結果<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f() <span class="hljs-comment">//1</span></span><br><span class="line">f() <span class="hljs-comment">//2</span></span><br><span class="line">f() <span class="hljs-comment">//3</span></span><br></pre></td></tr></tbody></table></figure><br><img src="https://lh3.googleusercontent.com/CRvTBVSE0imHcJXNzX4IS6W9UyfF301ReaoLh63FFA2F3YjvLYSuJKKF8dBXTmrtnW9Q-8vf3XICvFnTtisHSzIEaVVooBUjfZgUdwmNZ5QhzGcebdfzQYABOV-f3eDxfAz6Dqpwu13LxJzhPzNHKBcXLGTeJAHFrI3l3JGn8lJvSDPUqNB2vo4FEElhCC-93n60T_e1b-E8WAQhE0QSzRDyR0Mw_Td3sN9KrZQbUoO6wZfgfTSF2M8UKaJjXKCgF8K4mOHwSMHj6JWOQkw1cTaI3qgXuEYAac4AhcGLDcIoXOg4qNy_kC1JXBxSZA_KX4KfHjYekV-r9gHZytGAtazlV8L38oCBwhAXKcD_H1ixrWZ2VmEihMB0kPdHU0UZ3mq1ovQ04XIOqOxXbrijsuwFtlM4DR9QzMsZ1tsbmoXmmv7nfu-tdvWuQ0xPzagFogsfnlNvdrz0AHEJJMHbbsNOkgsaRQGUA5SeIA3dURxXyZYee1Bx4W1wfRBySK9dqSfhjIO1d7l7JwGmCvC3MhsOaZUrLndQpM4eGb7ptH-7mg8fJM8dap438vWu8E61gmIeP-icBJtfyYzVSu8UfTMpNhGRXXAji7mqN12X2ErTaIoJyrHGobsY3-Qy6dxd-nz49gTDmteaJxbwN_teShSpOUGjVv80Fa0gOaFBbbvwJ9-4Vypief8=w784-h882-no" alt="alt"><p></p>
-<h3 id="上面程式碼的大意："><a href="#上面程式碼的大意：" class="headerlink" title="上面程式碼的大意："></a>上面程式碼的大意：</h3><p>我們來看函式foo定義了三件事：</p>
-<ul>
-<li>a = 0</li>
-<li>定義函式run</li>
-<li>return 函式run<br>而函式run定義了兩件事：</li>
-<li>a++</li>
-<li>return a<br>結果：每執行一次f()，a的結果就會加1<br>也就是closure發生了記憶體讓內層a的值，不會被釋放記憶<h3 id="閉包本質上就是一個匿名函式"><a href="#閉包本質上就是一個匿名函式" class="headerlink" title="閉包本質上就是一個匿名函式"></a>閉包本質上就是一個匿名函式</h3>也因為程式碼只執行傳回函式</li>
-<li>對foo()而言，內層的function run()是函式run()</li>
-<li>對f而言，內層的函式function run()是一個匿名函式function(){}<br>實際上，印出 f() 函式的範例中，建立了一個閉包(匿名函式)，在執行傳回函式run時這個匿名函式只做a++和return a，且即使foo()已經執行完畢，a變數依然是存活在傳回的閉包範疇(記憶體)中。<h3 id="重點"><a href="#重點" class="headerlink" title="重點"></a>重點</h3>閉包將變數a本身關閉在自己的範疇(記憶體)中，而不是變數的值</li>
-</ul>
-</body></html>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/callback/" itemprop="url">關於callback</a>
+            關於callback
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -195,141 +154,56 @@
     </div>
     
     
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/passportjs/" itemprop="url">使用Passport.js實作GitHub第三方登入驗證機制</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2020-01-27T05:40:15.000Z" itemprop="datePublished">1月 27 2020</time>
-        </span>
-        
-        
-        <span class="column is-narrow">
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
+            <a href="/closure/">認識Closure(閉包)</a>
             
-            1 分钟 讀完 (約 220 字)
         </span>
-        
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/passportjs/">使用Passport.js實作GitHub第三方登入驗證機制</a>
+            
+        </span>
     </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <html><head></head><body><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><del>為提升自己的學習所隨手寫的筆記，可能會發生部分只有小編能看懂的地方</del></p>
-<h2 id="0-版本與環境"><a href="#0-版本與環境" class="headerlink" title="0. 版本與環境"></a>0. 版本與環境</h2><p></p><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">作業系統： Mac OS 10.15</span><br><span class="line">Nodejs:： v10.15.3</span><br></pre></td></tr></tbody></table></figure><p></p>
-<h2 id="前置：擁有一個EXPRESS專案"><a href="#前置：擁有一個EXPRESS專案" class="headerlink" title="前置：擁有一個EXPRESS專案"></a>前置：擁有一個EXPRESS專案</h2><p>如果您還沒有EXPRESS專案，請先跟著我之前的文章安裝express-generator。然後我們執行下面的指令建立專案。<br><code>$ express <Your Project Name></code></p>
-<hr>
-<h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><ol>
-<li>安裝<code>passport</code>，可參考<a href="http://www.passportjs.org/" target="_blank" rel="noopener">Passport官網</a></li>
-</ol>
-<p></p><figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install passport --save</span><br></pre></td></tr></tbody></table></figure><p></p>
-<blockquote>
-<p>passport本身就像是一個鑰匙圈，可以新增很多把驗證鑰匙套進去passport</p>
-</blockquote>
-<ol start="2">
-<li>安裝<code>passport-gihub</code>(加入passport的鑰匙圈裡)</li>
-</ol>
-<p></p><figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> npm install passport-github --save</span></span><br></pre></td></tr></tbody></table></figure><p></p>
-<ol start="3">
-<li>安裝<code>express-session</code><br>passport 本身只提供驗證機制，其他過程中如果需要功能像是 session 則是交給其他 Middleware。這邊我們則使用 express-session 來處理。</li>
-</ol>
-<p></p><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></tbody></table></figure><p></p>
-</body></html>
-    
-    </div>
-    
     
 </article>
 
 
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5e35441fdc145b0012bb87b1&amp;product=inline-share-buttons&amp;cms=sop' async='async'></script>
 
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/learning-express-generator/" itemprop="url">學習 express-generator</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2020-01-25T10:04:28.000Z" itemprop="datePublished">1月 25 2020</time>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            几秒 讀完 (約 33 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <html><head></head><body><h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p>-g 表示要安裝在全域<br><epacse hidden>13</epacse></p>
-<h2 id="創建一個新的EXPRESS-scaffold"><a href="#創建一個新的EXPRESS-scaffold" class="headerlink" title="創建一個新的EXPRESS scaffold"></a>創建一個新的EXPRESS scaffold</h2><p><epacse hidden>14</epacse></p></body></html>
-        <p class="article-more-link">
-            <a href="/learning-express-generator/#more">閱讀更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
+</div>
 
 
 
-
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
     
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://1984-zen.github.io/callback/';
+        this.page.identifier = 'callback/';
         
-            <a href="/hello-world/" itemprop="url">Hello World</a>
+        this.language = 'zh';
         
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2020-01-24T08:17:53.398Z" itemprop="datePublished">1月 24 2020</time>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            1 分钟 讀完 (約 123 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <html><head></head><body><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><p></p><figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><p></p><figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><p></p><figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><p></p><figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-</body></html>
-    
-    </div>
-    
-    
-</article>
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'https-1984-zen-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
 
-
-
-
+<div id="disqus_thread">
     
-    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
     </div>
 </section>
     <footer class="footer">
