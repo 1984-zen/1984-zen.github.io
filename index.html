@@ -138,13 +138,22 @@
     
         <html><head></head><body><h4 id="閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件"><a href="#閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件" class="headerlink" title="閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件"></a>閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件</h4><p>使用閉包時要注意：閉包雖然簡單易用，但也會造成佔用記憶體的問題。因為會讓函式執行完畢後，某些情況下，閉包的變數仍然無法釋放記憶體，所以使用閉包時還是要謹慎小心。</p>
 <h1 id="來看一個閉包的例子"><a href="#來看一個閉包的例子" class="headerlink" title="來看一個閉包的例子"></a>來看一個閉包的例子</h1><p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>)</span>{</span><br><span class="line">    <span class="hljs-keyword">let</span> a =<span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span>(<span class="hljs-params"></span>)</span>{</span><br><span class="line">        a++;</span><br><span class="line">        <span class="hljs-keyword">return</span> a</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> run;</span><br><span class="line">}</span><br><span class="line"><span class="hljs-keyword">var</span> f = foo();</span><br><span class="line"><span class="hljs-built_in">console</span>.log(f());</span><br></pre></td></tr></tbody></table></figure><br>執行結果<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f() <span class="hljs-comment">//1</span></span><br><span class="line">f() <span class="hljs-comment">//2</span></span><br><span class="line">f() <span class="hljs-comment">//3</span></span><br></pre></td></tr></tbody></table></figure><br><img src="https://lh3.googleusercontent.com/CRvTBVSE0imHcJXNzX4IS6W9UyfF301ReaoLh63FFA2F3YjvLYSuJKKF8dBXTmrtnW9Q-8vf3XICvFnTtisHSzIEaVVooBUjfZgUdwmNZ5QhzGcebdfzQYABOV-f3eDxfAz6Dqpwu13LxJzhPzNHKBcXLGTeJAHFrI3l3JGn8lJvSDPUqNB2vo4FEElhCC-93n60T_e1b-E8WAQhE0QSzRDyR0Mw_Td3sN9KrZQbUoO6wZfgfTSF2M8UKaJjXKCgF8K4mOHwSMHj6JWOQkw1cTaI3qgXuEYAac4AhcGLDcIoXOg4qNy_kC1JXBxSZA_KX4KfHjYekV-r9gHZytGAtazlV8L38oCBwhAXKcD_H1ixrWZ2VmEihMB0kPdHU0UZ3mq1ovQ04XIOqOxXbrijsuwFtlM4DR9QzMsZ1tsbmoXmmv7nfu-tdvWuQ0xPzagFogsfnlNvdrz0AHEJJMHbbsNOkgsaRQGUA5SeIA3dURxXyZYee1Bx4W1wfRBySK9dqSfhjIO1d7l7JwGmCvC3MhsOaZUrLndQpM4eGb7ptH-7mg8fJM8dap438vWu8E61gmIeP-icBJtfyYzVSu8UfTMpNhGRXXAji7mqN12X2ErTaIoJyrHGobsY3-Qy6dxd-nz49gTDmteaJxbwN_teShSpOUGjVv80Fa0gOaFBbbvwJ9-4Vypief8=w784-h882-no" alt="alt"><p></p>
-<h3 id="上面程式碼的大意："><a href="#上面程式碼的大意：" class="headerlink" title="上面程式碼的大意："></a>上面程式碼的大意：</h3><p>我們來看函式foo定義了三件事：</p>
-<ul>
+<h3 id="上面程式碼的大意："><a href="#上面程式碼的大意：" class="headerlink" title="上面程式碼的大意："></a>上面程式碼的大意：</h3><ul>
+<li>我們來看函式foo定義了三件事：</li>
+</ul>
+<ol>
 <li>a = 0</li>
 <li>定義函式run</li>
-<li>return 函式run<br>而函式run定義了兩件事：</li>
+<li>return 函式run</li>
+</ol>
+<ul>
+<li>而函式run定義了兩件事：</li>
+</ul>
+<ol>
 <li>a++</li>
-<li>return a<br>結果：每執行一次f()，a的結果就會加1<br>也就是closure發生了記憶體讓內層a的值，不會被釋放記憶<h3 id="閉包本質上就是一個匿名函式"><a href="#閉包本質上就是一個匿名函式" class="headerlink" title="閉包本質上就是一個匿名函式"></a>閉包本質上就是一個匿名函式</h3>也因為程式碼只執行傳回函式</li>
+<li>return a<h3 id="結果：每執行一次f-，a的結果就會加1"><a href="#結果：每執行一次f-，a的結果就會加1" class="headerlink" title="結果：每執行一次f()，a的結果就會加1"></a>結果：每執行一次f()，a的結果就會加1</h3>也就是closure發生了記憶體讓內層a的值，不會被釋放記憶<h3 id="閉包本質上就是一個匿名函式"><a href="#閉包本質上就是一個匿名函式" class="headerlink" title="閉包本質上就是一個匿名函式"></a>閉包本質上就是一個匿名函式</h3>也因為程式碼只執行傳回函式</li>
+</ol>
+<ul>
 <li>對foo()而言，內層的function run()是函式run()</li>
 <li>對f而言，內層的函式function run()是一個匿名函式function(){}<br>實際上，印出 f() 函式的範例中，建立了一個閉包(匿名函式)，在執行傳回函式run時這個匿名函式只做a++和return a，且即使foo()已經執行完畢，a變數依然是存活在傳回的閉包範疇(記憶體)中。<h3 id="重點"><a href="#重點" class="headerlink" title="重點"></a>重點</h3>閉包將變數a本身關閉在自己的範疇(記憶體)中，而不是變數的值</li>
 </ul>
