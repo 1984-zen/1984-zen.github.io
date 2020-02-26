@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>認識Closure(閉包) - Zen Coding</title>
+<title>reduce - Zen Coding</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -16,20 +16,17 @@
 
 
 
-    <meta name="description" content="閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件使用閉包時要注意：閉包雖然簡單易用，但也會造成佔用記憶體的問題。因為會讓函式執行完畢後，某些情況下，閉包的變數仍然無法釋放記憶體，所以使用閉包時還是要謹慎小心。 來看一個閉包的例子12345678910function foo(){    let a &#x3D;0;    function run(){        a">
+    <meta name="description" content="什麼是Reducereduce是javascript的「同步」array method，他就是把一整個array的所有內容，有順序性的擠壓成一個值 Reduce表達式[1,2,3,4].reduce((accumulator, currentValue) &#x3D;&gt; {    &#x2F;&#x2F;call back要做的動作，最後變成一個值}, initValue)&#x2F;&#x2F;accumulator &#x3D; 積累&#x2F;&#x2F;for迴圈將陣">
 <meta property="og:type" content="article">
-<meta property="og:title" content="認識Closure(閉包)">
-<meta property="og:url" content="https://1984-zen.github.io/closure/index.html">
+<meta property="og:title" content="reduce">
+<meta property="og:url" content="https://1984-zen.github.io/reduce/index.html">
 <meta property="og:site_name" content="Zen Coding">
-<meta property="og:description" content="閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件使用閉包時要注意：閉包雖然簡單易用，但也會造成佔用記憶體的問題。因為會讓函式執行完畢後，某些情況下，閉包的變數仍然無法釋放記憶體，所以使用閉包時還是要謹慎小心。 來看一個閉包的例子12345678910function foo(){    let a &#x3D;0;    function run(){        a">
+<meta property="og:description" content="什麼是Reducereduce是javascript的「同步」array method，他就是把一整個array的所有內容，有順序性的擠壓成一個值 Reduce表達式[1,2,3,4].reduce((accumulator, currentValue) &#x3D;&gt; {    &#x2F;&#x2F;call back要做的動作，最後變成一個值}, initValue)&#x2F;&#x2F;accumulator &#x3D; 積累&#x2F;&#x2F;for迴圈將陣">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://lh3.googleusercontent.com/tpjt8WB1qY0BGOYXclWyCdirx_zt6q12mS49o1N0gnyO1vwnXufYCFzq6xDRiN0pivpB3u_3RlRWdKwHzu47CG3dSgjzFR5er5u2lM2yTDPDfPkr6ZoTSbIZDkQJy56z4_YWEWhmeMATuv3yfSha2eeQIBPpFCtYwmvM9zgl5Z3zoxNmTa1yv4v-ePFZ6h_w9vHt5-MxiVh11HD40RGG2V8ogCwKZ9T19Y2EMmzibrB3XXNSwIGs8eEbrwdxuZSFFWdwbQOgo_n3OzOGf2lhz9CozHieiOoyHaCzGtkMRTe8v32YVAU8BtvNsuXZWavTHZ9iKBhxhpUFAvI75tTti-V07Aq6Jx8Q9whiP-4hshrA_mMQFqSlC_gI2-nj-mPXHrpWElrCXnEs3P3EWwltPZ9ySFUghKSOClH5nIAgU3gAIn4X3iE5Im7bTV5LjOen7zLHhkEbLX5KkbDqSxSyrPDX5FTHVGkbsd2phCm7XTlg8MAUac1WDddxnaQYX5OHXZycPwQ_bv6MBqcX56rAAjsX9WiR8L7gOpI-Msknq9ZDVyd0n9TxoUx0FJnVcwH_nhwKRXS8pm76nlmpCWGLao-frKud1DkuGf_H6ULeGqyVHjOJNVdTGtZ-qvQGXRS7220tkocHiUepjuZMHc67RdUinqiPFVpdaDHKrm8JPkQJGSgB5g-iBoLJyhgkrPGo0m_Xs-bsfbvnLvxVNDBftTsS-HZTaEDWZrWb4iBmAYiOYYc-=w784-h882-no">
-<meta property="article:published_time" content="2020-02-09T12:13:03.000Z">
-<meta property="article:modified_time" content="2020-02-15T13:45:05.460Z">
+<meta property="article:published_time" content="2020-02-26T02:03:41.000Z">
+<meta property="article:modified_time" content="2020-02-26T02:27:27.921Z">
 <meta property="article:author" content="Zen">
-<meta property="article:tag" content="javascript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lh3.googleusercontent.com/tpjt8WB1qY0BGOYXclWyCdirx_zt6q12mS49o1N0gnyO1vwnXufYCFzq6xDRiN0pivpB3u_3RlRWdKwHzu47CG3dSgjzFR5er5u2lM2yTDPDfPkr6ZoTSbIZDkQJy56z4_YWEWhmeMATuv3yfSha2eeQIBPpFCtYwmvM9zgl5Z3zoxNmTa1yv4v-ePFZ6h_w9vHt5-MxiVh11HD40RGG2V8ogCwKZ9T19Y2EMmzibrB3XXNSwIGs8eEbrwdxuZSFFWdwbQOgo_n3OzOGf2lhz9CozHieiOoyHaCzGtkMRTe8v32YVAU8BtvNsuXZWavTHZ9iKBhxhpUFAvI75tTti-V07Aq6Jx8Q9whiP-4hshrA_mMQFqSlC_gI2-nj-mPXHrpWElrCXnEs3P3EWwltPZ9ySFUghKSOClH5nIAgU3gAIn4X3iE5Im7bTV5LjOen7zLHhkEbLX5KkbDqSxSyrPDX5FTHVGkbsd2phCm7XTlg8MAUac1WDddxnaQYX5OHXZycPwQ_bv6MBqcX56rAAjsX9WiR8L7gOpI-Msknq9ZDVyd0n9TxoUx0FJnVcwH_nhwKRXS8pm76nlmpCWGLao-frKud1DkuGf_H6ULeGqyVHjOJNVdTGtZ-qvQGXRS7220tkocHiUepjuZMHc67RdUinqiPFVpdaDHKrm8JPkQJGSgB5g-iBoLJyhgkrPGo0m_Xs-bsfbvnLvxVNDBftTsS-HZTaEDWZrWb4iBmAYiOYYc-=w784-h882-no">
 
 
 
@@ -124,66 +121,44 @@
     <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            認識Closure(閉包)
+            reduce
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2020-02-09T12:13:03.000Z" itemprop="datePublished">2月 9 2020</time>
+            <time datetime="2020-02-26T02:03:41.000Z" itemprop="datePublished">2月 26 2020</time>
         </span>
         
         
         <span class="column is-narrow">
             
             
-            4 分钟 讀完 (約 528 字)
+            2 分钟 讀完 (約 266 字)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><h4 id="閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件"><a href="#閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件" class="headerlink" title="閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件"></a>閉包簡短的定義：巢狀的function就可能會發生閉包，閉包就是用內層去使用外層的物件</h4><p>使用閉包時要注意：閉包雖然簡單易用，但也會造成佔用記憶體的問題。因為會讓函式執行完畢後，某些情況下，閉包的變數仍然無法釋放記憶體，所以使用閉包時還是要謹慎小心。</p>
-<h1 id="來看一個閉包的例子"><a href="#來看一個閉包的例子" class="headerlink" title="來看一個閉包的例子"></a>來看一個閉包的例子</h1><p></p><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>)</span>{</span><br><span class="line">    <span class="hljs-keyword">let</span> a =<span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span>(<span class="hljs-params"></span>)</span>{</span><br><span class="line">        a++;</span><br><span class="line">        <span class="hljs-keyword">return</span> a</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> run;</span><br><span class="line">}</span><br><span class="line"><span class="hljs-keyword">var</span> f = foo();</span><br><span class="line"><span class="hljs-built_in">console</span>.log(f());</span><br></pre></td></tr></tbody></table></figure><br>執行結果<br><figure class="highlight javascript hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f() <span class="hljs-comment">//1</span></span><br><span class="line">f() <span class="hljs-comment">//2</span></span><br><span class="line">f() <span class="hljs-comment">//3</span></span><br></pre></td></tr></tbody></table></figure><p></p>
-<p><img src="https://lh3.googleusercontent.com/tpjt8WB1qY0BGOYXclWyCdirx_zt6q12mS49o1N0gnyO1vwnXufYCFzq6xDRiN0pivpB3u_3RlRWdKwHzu47CG3dSgjzFR5er5u2lM2yTDPDfPkr6ZoTSbIZDkQJy56z4_YWEWhmeMATuv3yfSha2eeQIBPpFCtYwmvM9zgl5Z3zoxNmTa1yv4v-ePFZ6h_w9vHt5-MxiVh11HD40RGG2V8ogCwKZ9T19Y2EMmzibrB3XXNSwIGs8eEbrwdxuZSFFWdwbQOgo_n3OzOGf2lhz9CozHieiOoyHaCzGtkMRTe8v32YVAU8BtvNsuXZWavTHZ9iKBhxhpUFAvI75tTti-V07Aq6Jx8Q9whiP-4hshrA_mMQFqSlC_gI2-nj-mPXHrpWElrCXnEs3P3EWwltPZ9ySFUghKSOClH5nIAgU3gAIn4X3iE5Im7bTV5LjOen7zLHhkEbLX5KkbDqSxSyrPDX5FTHVGkbsd2phCm7XTlg8MAUac1WDddxnaQYX5OHXZycPwQ_bv6MBqcX56rAAjsX9WiR8L7gOpI-Msknq9ZDVyd0n9TxoUx0FJnVcwH_nhwKRXS8pm76nlmpCWGLao-frKud1DkuGf_H6ULeGqyVHjOJNVdTGtZ-qvQGXRS7220tkocHiUepjuZMHc67RdUinqiPFVpdaDHKrm8JPkQJGSgB5g-iBoLJyhgkrPGo0m_Xs-bsfbvnLvxVNDBftTsS-HZTaEDWZrWb4iBmAYiOYYc-=w784-h882-no" alt="alt"></p>
-<h3 id="上面程式碼的大意："><a href="#上面程式碼的大意：" class="headerlink" title="上面程式碼的大意："></a>上面程式碼的大意：</h3><ul>
-<li>我們來看函式foo定義了三件事：</li>
-</ul>
-<ol>
-<li>a = 0</li>
-<li>定義函式run</li>
-<li>return 函式run</li>
-</ol>
+        <html><head></head><body><h1 id="什麼是Reduce"><a href="#什麼是Reduce" class="headerlink" title="什麼是Reduce"></a>什麼是Reduce</h1><p>reduce是javascript的「同步」array method，他就是把一整個array的所有內容，有順序性的擠壓成一個值</p>
+<h1 id="Reduce表達式"><a href="#Reduce表達式" class="headerlink" title="Reduce表達式"></a>Reduce表達式</h1><p>[1,2,3,4].reduce((accumulator, currentValue) => {<br>    //call back要做的動作，最後變成一個值<br>}, initValue)<br>//accumulator = 積累<br>//for迴圈將陣列內容依序一個一個的帶進來</p>
+<h1 id="Reduce-拆解"><a href="#Reduce-拆解" class="headerlink" title="Reduce 拆解"></a>Reduce 拆解</h1><p>reduce需要：</p>
 <ul>
-<li>而函式run定義了兩件事：</li>
-</ul>
-<ol>
-<li>a++</li>
-<li>return a<h3 id="結果：每執行一次f-，a的結果就會加1"><a href="#結果：每執行一次f-，a的結果就會加1" class="headerlink" title="結果：每執行一次f()，a的結果就會加1"></a>結果：每執行一次f()，a的結果就會加1</h3>也就是closure發生了記憶體讓內層a的值，不會被釋放記憶<h3 id="閉包本質上就是一個匿名函式"><a href="#閉包本質上就是一個匿名函式" class="headerlink" title="閉包本質上就是一個匿名函式"></a>閉包本質上就是一個匿名函式</h3>也因為程式碼只執行傳回函式</li>
-</ol>
-<ul>
-<li>對foo()而言，內層的function run()是函式run()</li>
-<li>對f而言，內層的函式function run()是一個匿名函式function(){}<br>實際上，印出 f() 函式的範例中，建立了一個閉包(匿名函式)，在執行傳回函式run時這個匿名函式只做a++和return a，且即使foo()已經執行完畢，a變數依然是存活在傳回的閉包範疇(記憶體)中。<h3 id="重點"><a href="#重點" class="headerlink" title="重點"></a>重點</h3>閉包將變數a本身關閉在自己的範疇(記憶體)中，而不是變數的值</li>
+<li>一個變數</li>
+<li>一個for迴圈</li>
+<li>一個初始值<h1 id="簡化版Reduce-polyfill"><a href="#簡化版Reduce-polyfill" class="headerlink" title="簡化版Reduce polyfill"></a>簡化版Reduce polyfill</h1>const reduceFunc = (reducer, initVal, dataArray) => {<br>let val = initVal;<br>for(const i in dataArray) {<br>  val = reducer(val, dataArray[i]);<br>}<br>return val;<br>}<br>reduceFunc((acc, current) => (acc + current), 0, [1, 2, 3, 4])<br>// 10<br>以上範例是拆解reduce的工作，簡單來說一開始先拿到初始值initValue，然後用for迴圈一個一個的帶進去reducer(val, dataArray[i])，acc的初始值是initVal接著的每一次for迴圈acc都會是前一次結果的值，過程順序如下：<br>//acc = 0, current = 1, val = 1<br>//acc = 1, current = 2, val = 3<br>//acc = 3, current = 3, val = 6<br>//acc = 6, current = 4, val = 10<br><a href="https://medium.com/@mengweichen/%E8%AE%93js-array-reduce%E8%88%87async-await%E5%85%B1%E8%88%9E-157a66ea2dfb" target="_blank" rel="noopener">本範例來源摘自網路</a><h1 id="Reduce不是遞迴而是for迴圈"><a href="#Reduce不是遞迴而是for迴圈" class="headerlink" title="Reduce不是遞迴而是for迴圈"></a>Reduce不是遞迴而是for迴圈</h1></li>
 </ul>
 </body></html>
     
     </div>
     
-    <div class="columns is-variable is-1 is-multiline is-mobile">
-    
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/javascript/">#javascript</a></span>
-    
-    </div>
-    
     
     <div class="columns is-mobile is-multiline article-nav">
-        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
-            
-            <a href="/reduce/">reduce</a>
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/callback/">關於callback</a>
+            <a href="/closure/">認識Closure(閉包)</a>
             
         </span>
     </div>
@@ -205,8 +180,8 @@
     
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://1984-zen.github.io/closure/';
-        this.page.identifier = 'closure/';
+        this.page.url = 'https://1984-zen.github.io/reduce/';
+        this.page.identifier = 'reduce/';
         
         this.language = 'zh';
         

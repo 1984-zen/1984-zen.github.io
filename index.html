@@ -118,6 +118,46 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
+            <a href="/reduce/" itemprop="url">reduce</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2020-02-26T02:03:41.000Z" itemprop="datePublished">2月 26 2020</time>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            2 分钟 讀完 (約 266 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h1 id="什麼是Reduce"><a href="#什麼是Reduce" class="headerlink" title="什麼是Reduce"></a>什麼是Reduce</h1><p>reduce是javascript的「同步」array method，他就是把一整個array的所有內容，有順序性的擠壓成一個值</p>
+<h1 id="Reduce表達式"><a href="#Reduce表達式" class="headerlink" title="Reduce表達式"></a>Reduce表達式</h1><p>[1,2,3,4].reduce((accumulator, currentValue) => {<br>    //call back要做的動作，最後變成一個值<br>}, initValue)<br>//accumulator = 積累<br>//for迴圈將陣列內容依序一個一個的帶進來</p>
+<h1 id="Reduce-拆解"><a href="#Reduce-拆解" class="headerlink" title="Reduce 拆解"></a>Reduce 拆解</h1><p>reduce需要：</p>
+<ul>
+<li>一個變數</li>
+<li>一個for迴圈</li>
+<li>一個初始值<h1 id="簡化版Reduce-polyfill"><a href="#簡化版Reduce-polyfill" class="headerlink" title="簡化版Reduce polyfill"></a>簡化版Reduce polyfill</h1>const reduceFunc = (reducer, initVal, dataArray) => {<br>let val = initVal;<br>for(const i in dataArray) {<br>  val = reducer(val, dataArray[i]);<br>}<br>return val;<br>}<br>reduceFunc((acc, current) => (acc + current), 0, [1, 2, 3, 4])<br>// 10<br>以上範例是拆解reduce的工作，簡單來說一開始先拿到初始值initValue，然後用for迴圈一個一個的帶進去reducer(val, dataArray[i])，acc的初始值是initVal接著的每一次for迴圈acc都會是前一次結果的值，過程順序如下：<br>//acc = 0, current = 1, val = 1<br>//acc = 1, current = 2, val = 3<br>//acc = 3, current = 3, val = 6<br>//acc = 6, current = 4, val = 10<br><a href="https://medium.com/@mengweichen/%E8%AE%93js-array-reduce%E8%88%87async-await%E5%85%B1%E8%88%9E-157a66ea2dfb" target="_blank" rel="noopener">本範例來源摘自網路</a><h1 id="Reduce不是遞迴而是for迴圈"><a href="#Reduce不是遞迴而是for迴圈" class="headerlink" title="Reduce不是遞迴而是for迴圈"></a>Reduce不是遞迴而是for迴圈</h1></li>
+</ul>
+</body></html>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
             <a href="/closure/" itemprop="url">認識Closure(閉包)</a>
         
     </h1>
@@ -283,8 +323,8 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p>-g 表示要安裝在全域<br><epacse hidden>10</epacse></p>
-<h2 id="創建一個新的EXPRESS-scaffold"><a href="#創建一個新的EXPRESS-scaffold" class="headerlink" title="創建一個新的EXPRESS scaffold"></a>創建一個新的EXPRESS scaffold</h2><p><epacse hidden>11</epacse></p></body></html>
+        <html><head></head><body><h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p>-g 表示要安裝在全域<br><epacse hidden>13</epacse></p>
+<h2 id="創建一個新的EXPRESS-scaffold"><a href="#創建一個新的EXPRESS-scaffold" class="headerlink" title="創建一個新的EXPRESS scaffold"></a>創建一個新的EXPRESS scaffold</h2><p><epacse hidden>14</epacse></p></body></html>
         <p class="article-more-link">
             <a href="/learning-express-generator/#more">閱讀更多</a>
         </p>
